@@ -1,0 +1,23 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Segoe UI,54,&H00FFFFFF,&H0000F0FF,&H00080C14,&HA0000000,-1,0,0,0,100,100,0,0,1,4.5,2.5,2,60,60,210,1
+Style: TopTag,Consolas,30,&H00FFE600,&H00FFFFFF,&H00080C14,&HC0080C14,-1,0,0,0,100,100,1.5,0,3,12,0,8,50,50,85,1
+Style: SubTag,Segoe UI Semibold,24,&H00E2E8F0,&H00FFFFFF,&H00080C14,&H00000000,-1,0,0,0,100,100,1.0,0,1,2.5,1.0,8,50,50,140,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:32.00,TopTag,,0,0,0,,ARIA TECHNOLOGY GROUP // GARBAGE IN -> GOLD OUT
+Dialogue: 0,0:00:00.00,0:00:32.00,SubTag,,0,0,0,,EYE-LINE TELEPROMPTER HUD • INSTA360 X5 • ZERO-CLICK EDIT
+Dialogue: 0,0:00:00.10,0:00:05.80,Default,,0,0,0,,Just finished shooting with the {\c&HFFE600&}AI Teleprompter{\c&HFFFFFF&} & {\c&H00D4FF&}Insta360{\c&HFFFFFF&} virtual set.
+Dialogue: 0,0:00:05.80,0:00:12.40,Default,,0,0,0,,Now the agent is {\c&HFFE600&}editing{\c&HFFFFFF&} — cutting my {\c&H00D4FF&}awkward pause{\c&HFFFFFF&} at the start automatically.
+Dialogue: 0,0:00:12.80,0:00:19.80,Default,,0,0,0,,Look at how {\c&H00D4FF&}messy my raw prompts{\c&HFFFFFF&} are — typos and all.
+Dialogue: 0,0:00:20.30,0:00:23.20,Default,,0,0,0,,A {\c&HFFE600&}real agentic system{\c&HFFFFFF&} just handles it for you.
+Dialogue: 0,0:00:23.30,0:00:28.50,Default,,0,0,0,,Prompt perfection doesn't matter when your {\c&HFFE600&}agents self-heal{\c&HFFFFFF&}.
+Dialogue: 0,0:00:28.50,0:00:32.00,Default,,0,0,0,,Put {\c&H00D4FF&}messy input in{\c&HFFFFFF&} — get {\c&HFFE600&}production gold out{\c&HFFFFFF&}.
