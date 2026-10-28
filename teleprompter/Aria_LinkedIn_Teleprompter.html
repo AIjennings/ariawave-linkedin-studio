@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aria Technology Group — LinkedIn Teleprompter</title>
+<style>
+  :root {
+    --bg: #070a10;
+    --panel: #101622;
+    --cyan: #00f0ff;
+    --purple: #9d4edd;
+    --text: #f1f5f9;
+    --muted: #64748b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  header {
+    background: var(--panel);
+    border-bottom: 1px solid rgba(0, 240, 255, 0.25);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 20;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+  }
+  .brand h1 {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--cyan);
+  }
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  button {
+    background: rgba(0, 240, 255, 0.12);
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.15s;
+  }
+  button:hover, button.active {
+    background: var(--cyan);
+    color: #000;
+  }
+  .slider-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #cbd5e1;
+  }
+  .timer {
+    font-family: monospace;
+    font-size: 20px;
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  main {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    flex: 1;
+    overflow: hidden;
+  }
+  .prompter-wrap {
+    position: relative;
+    overflow-y: auto;
+    padding: 18vh 8vw 50vh 8vw;
+    scroll-behavior: auto;
+  }
+  .eye-line {
+    position: fixed;
+    top: 28%;
+    left: 0;
+    width: calc(100% - 400px);
+    height: 90px;
+    border-top: 2px dashed rgba(0, 240, 255, 0.45);
+    border-bottom: 2px dashed rgba(0, 240, 255, 0.45);
+    background: rgba(0, 240, 255, 0.04);
+    pointer-events: none;
+    z-index: 10;
+  }
+  .eye-label {
+    position: absolute;
+    left: 16px;
+    top: -22px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+  .script {
+    font-size: 38px;
+    line-height: 1.55;
+    font-weight: 600;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .cue {
+    display: inline-block;
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #facc15;
+    background: rgba(250, 204, 21, 0.12);
+    border: 1px solid rgba(250, 204, 21, 0.4);
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin: 28px 0 10px 0;
+  }
+  .beat {
+    margin-bottom: 34px;
+  }
+  .hl-cyan { color: var(--cyan); }
+  .hl-purple { color: #d8b4fe; }
+  .sidebar {
+    background: var(--panel);
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding: 22px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .sidebar h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--cyan);
+  }
+  .post-box {
+    background: #090d15;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #e2e8f0;
+    white-space: pre-wrap;
+  }
+  .tip-card {
+    background: rgba(157, 78, 221, 0.1);
+    border: 1px solid rgba(157, 78, 221, 0.35);
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="dot"></div>
+    <h1>Aria Technology Group // LinkedIn Studio Prompter</h1>
+  </div>
+  <div class="controls">
+    <button id="playBtn" onclick="toggleScroll()">▶ Start Auto-Scroll (Space)</button>
+    <button onclick="resetScroll()">↺ Reset</button>
+    <div class="slider-group">
+      <span>Speed</span>
+      <input type="range" id="speedRange" min="1" max="10" value="4" oninput="updateSpeed(this.value)">
+      <span id="speedVal">4</span>
+    </div>
+    <div class="slider-group">
+      <span>Font</span>
+      <input type="range" id="fontRange" min="24" max="56" value="38" oninput="updateFont(this.value)">
+    </div>
+    <div class="timer" id="timerDisplay">00:00</div>
+  </div>
+</header>
+
+<main>
+  <div class="eye-line"><span class="eye-label">▶ Read Here (Top of Screen Near Webcam)</span></div>
+  <div class="prompter-wrap" id="prompter">
+    <div class="script" id="scriptContent">
+
+      <div class="cue">[0:00 — Point thumb over your shoulder at the Alien Gunship &amp; Mustang]</div>
+      <div class="beat">
+        "Before you ask — <span class="hl-cyan">yes, that’s an alien gunship firing plasma outside my window</span> next to a Mustang… and yes, our AI agents built my studio background too."
+      </div>
+
+      <div class="cue">[0:08 — Lean in, conversational &amp; impactful]</div>
+      <div class="beat">
+        "But what’s happening behind me is nothing compared to what we just deployed for a live operation at <span class="hl-cyan">Aria Technology Group</span>."
+      </div>
+
+      <div class="cue">[0:16 — The Video Waiver Story]</div>
+      <div class="beat">
+        "We rolled out our new <span class="hl-purple">Agentic Video Waiver software</span> to brand-new employees with <span class="hl-cyan">zero training</span>. No manuals. No onboarding sessions."
+      </div>
+
+      <div class="beat">
+        "Instead of a rigid legacy screen, the system runs a <span class="hl-cyan">generative, iterative UI</span> managed entirely by autonomous agents. When an employee got stuck or an edge case popped up, the software didn't crash — <span class="hl-purple">it self-healed and adapted the interface in real time</span>. It was amazing."
+      </div>
+
+      <div class="cue">[0:36 — Open Sourcing via Ariawave]</div>
+      <div class="beat">
+        "At Aria Technology Group, we believe in pushing the ecosystem forward — so we’re <span class="hl-cyan">open-sourcing a massive part of this engine through Ariawave</span>."
+      </div>
+
+      <div class="cue">[0:45 — Why Expert Consultants Matter]</div>
+      <div class="beat">
+        "But here’s the reality every executive needs to hear: <span class="hl-purple">open-source code is not a production outcome</span>."
+      </div>
+
+      <div class="beat">
+        "Deploying self-healing software in the real world takes <span class="hl-cyan">layers of frontier intelligence, enterprise security guardrails, and battle-tested architecture</span>."
+      </div>
+
+      <div class="cue">[0:58 — Call to Action]</div>
+      <div class="beat">
+        "That’s why bringing in a specialized engineering partner like <span class="hl-cyan">Aria Technology Group</span> makes all the difference. If you want your systems running at light speed — reach out, and let's build."
+      </div>
+
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="tip-card">
+      <strong>💡 Quick Camera Setup Tip:</strong><br>
+      In your Zoom <em>Record new clip</em> panel (bottom right of your screenshot), uncheck <strong>"Mirror my video"</strong> if you want the Mustang on the left and the Alien Ship on the right, or sit slightly to the left of your frame so the lightning blast shoots right past your shoulder!
+    </div>
+
+    <h2>LinkedIn Post Copy (Ready to Paste)</h2>
+    <button onclick="copyPost()" id="copyBtn">📋 Copy LinkedIn Post Text</button>
+    <div class="post-box" id="postText">Yes, that’s an alien gunship firing plasma outside my window next to a Mustang—and yes, our AI agents built my Zoom studio too. ⚡🛸
+
+But what’s happening behind me is nothing compared to what we just deployed in production at Aria Technology Group.
+
+We rolled out our new Agentic Video Waiver software to brand-new employees with ZERO training. No manuals. No onboarding bottlenecks.
+
+Instead of a brittle form, the platform runs a generative, iterative UI managed in real time by autonomous agents. Whenever a workflow hit friction or an unexpected edge case appeared, the software self-healed on the fly. Watching brand-new staff fly through it on day one was amazing.
+
+We’re open-sourcing a huge piece of this foundation through Ariawave so builders everywhere can experiment with agentic pipelines.
+
+However, there is a massive gap between downloading a repo and running mission-critical software in production. True self-healing outcomes require deep layers of:
+🔹 Frontier intelligence orchestration
+🔹 Enterprise-grade security &amp; compliance guardrails
+🔹 Deterministic recovery &amp; production systems engineering
+
+Open source gives you the engine. An experienced consulting and engineering partner like Aria Technology Group gets you safely into orbit.
+
+If you’re ready to bring self-healing, zero-training agentic software into your organization, DM me or reach out to Aria Technology Group.
+
+#AriaTechnologyGroup #Ariawave #AgenticAI #GenerativeUI #SelfHealingSoftware #EnterpriseAI #AISecurity #FutureOfWork</div>
+  </aside>
+</main>
+
+<script>
+  let scrolling = false;
+  let speed = 4;
+  let rafId = null;
+  let startTime = null;
+  let timerInterval = null;
+  const prompter = document.getElementById('prompter');
+  const playBtn = document.getElementById('playBtn');
+
+  function step() {
+    if (!scrolling) return;
+    prompter.scrollTop += speed * 0.35;
+    rafId = requestAnimationFrame(step);
+  }
+
+  function toggleScroll() {
+    scrolling = !scrolling;
+    if (scrolling) {
+      playBtn.textContent = '⏸ Pause (Space)';
+      playBtn.classList.add('active');
+      if (!startTime) startTime = Date.now();
+      timerInterval = setInterval(updateTimer, 500);
+      rafId = requestAnimationFrame(step);
+    } else {
+      playBtn.textContent = '▶ Resume (Space)';
+      playBtn.classList.remove('active');
+      clearInterval(timerInterval);
+      cancelAnimationFrame(rafId);
+    }
+  }
+
+  function resetScroll() {
+    scrolling = false;
+    cancelAnimationFrame(rafId);
+    clearInterval(timerInterval);
+    startTime = null;
+    prompter.scrollTop = 0;
+    playBtn.textContent = '▶ Start Auto-Scroll (Space)';
+    playBtn.classList.remove('active');
+    document.getElementById('timerDisplay').textContent = '00:00';
+  }
+
+  function updateSpeed(val) {
+    speed = Number(val);
+    document.getElementById('speedVal').textContent = val;
+  }
+
+  function updateFont(val) {
+    document.getElementById('scriptContent').style.fontSize = val + 'px';
+  }
+
+  function updateTimer() {
+    if (!startTime) return;
+    const sec = Math.floor((Date.now() - startTime) / 1000);
+    const m = String(Math.floor(sec / 60)).padStart(2, '0');
+    const s = String(sec % 60).padStart(2, '0');
+    document.getElementById('timerDisplay').textContent = `${m}:${s}`;
+  }
+
+  function copyPost() {
+    const text = document.getElementById('postText').innerText;
+    navigator.clipboard.writeText(text);
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied to Clipboard!';
+    setTimeout(() => btn.textContent = '📋 Copy LinkedIn Post Text', 2000);
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && e.target.tagName !== 'BUTTON') {
+      e.preventDefault();
+      toggleScroll();
+    }
+  });
+</script>
+</body>
+</html>
