@@ -70,7 +70,35 @@ When OBS records with both `Studio Mic (Default)` (`Insta360 X5`) and `USB Mic B
 
 ---
 
-## 5. Kimi WebBridge Browser Automation (`127.0.0.1:10086`)
+## 5. Midway Character & Voice Swap Pipeline (ElevenLabs STS + Flux Pro Kontext + Kling AI Avatar v2 Pro)
+
+To swap the speaker midway through an executive video (e.g., Andrew Jennings -> Steve Jobs at `22.50s..36.60s` -> Andrew Jennings) while keeping the moving background loop 100% seamless:
+1. **Extract the Midway Audio Stem & Pose Frame:**
+   - Slice the clean dry audio (`22.50s..36.60s`) and extract the composite frame at `t=22.50s` (`prep_steve_jobs_swap.py`).
+2. **Syllable-Locked Voice Conversion (ElevenLabs Speech-to-Speech):**
+   - POST the audio stem to `https://api.elevenlabs.io/v1/speech-to-speech/{voice_id}` (`eleven_multilingual_sts_v2`, e.g. `r7xva0mJjcdjj1WdpFIG` for Steve Jobs) so every syllable and pause matches the original delivery.
+3. **Foreground Character Swap (`fal-ai/flux-pro/kontext`):**
+   - Prompt `fal-ai/flux-pro/kontext` on the `t=22.50s` studio frame to replace the foreground speaker with the target persona (e.g., Steve Jobs in his 2007 black mock turtleneck and rimless glasses) while keeping the background identical.
+4. **Expressive Lip-Sync Video Generation (`fal-ai/kling-video/ai-avatar/v2/pro`):**
+   - Submit the Kontext frame + ElevenLabs STS audio stem to `fal-ai/kling-video/ai-avatar/v2/pro` (and `standard` in parallel) via `run_steve_jobs_sts_and_frame.py` and poll with `poll_steve_jobs_lipsync.py`.
+5. **Live Background Matting & Holographic Transition (`build_steve_jobs_swap_master.py`):**
+   - Segment the lip-synced Steve Jobs video with MediaPipe + O(1) Guided Filter and composite him over the **continuously moving** `ZOOM_BG_Alien_Mustang_Master_1080p.mp4` frames (`675..1098`) so the alien gunship and rain outside the window never freeze during the swap.
+   - Add an 8-frame holographic RGB scanline morph + subtle sci-fi synth sweep at the entry (`22.50s`) and exit (`36.60s`) points.
+
+---
+
+## 6. Zero-Marginal-Cost (`$0.00`) Browser Studio Engine (Unused ElevenLabs Credits + Kimi WebBridge + Fast Decision Model)
+
+Instead of paying `$3.17` per video on FAL API calls, use `C:\Users\Aria\ariawave-linkedin-studio\run_zero_cost_browser_studio.py` to spend the user's **unused ElevenLabs Creator subscription credits** (`250,026` monthly allowance) inside ElevenLabs' unified **Image & Video Studio** (`https://elevenlabs.io/app/image-video`):
+- **Included Image Models (Character Swap):** `FLUX.1 Kontext [Pro]` (`242` credits), `FLUX.2 [Pro]` (`182` credits), `Nano Banana 2.1` (`167` credits).
+- **Included Lip-Sync Models:** `MiniMax H3 Max Lip Sync` (`485` credits/s), `Sync Lipsync 2 Pro` (`661` credits/s), `Creatify Aurora` (`848` credits/s), `HeyGen Avatar 4` (`1,212` credits/s), and `OmniHuman 1.5` (`1,267` credits/s).
+- **Hybrid Speed Architecture:**
+  1. **Fast Deterministic Selectors (`0ms` overhead):** Attaches `Avatar` (`input[type="file"][accept*="image"]`) and `Speech` (`input[type="file"][accept*="audio"]`) directly via `DataTransfer` over the Kimi WebBridge (`127.0.0.1:10086`).
+  2. **Fast Decision-Making Model (`google/gemini-2.5-flash` via OpenRouter, `~450ms`–`630ms`):** Snapshots the compact interactive DOM (`get_compact_dom()`) and returns deterministic JSON (`{"action": "click", "idx": 214, "text_match": "Generate"}`) whenever dynamic Radix UI dialogs or model selectors change state.
+
+---
+
+## 7. Kimi WebBridge Browser Automation (`127.0.0.1:10086`)
 
 To automate the user's logged-in desktop Microsoft Edge browser (LinkedIn publishing, Google Flow, etc.):
 1. Ensure `C:\Users\Aria\.gemini\antigravity\scratch\kimi_webbridge_daemon.py` is running on `http://127.0.0.1:10086`.
