@@ -138,7 +138,42 @@ campaign_data = {
     },
     "live_placements": [
         {
-            "channel": "LinkedIn (Andrew Jennings — Viral Hook Edition)",
+            "channel": "LinkedIn (Andrew Jennings — $0.00 Token Arbitrage / HeyGen Avatar 4 Edition)",
+            "angle": "Token Management Strategy: Why Companies Pay Twice for AI ($3.24 -> $0.00 via Unused ElevenLabs Credits + WebBridge) + First-Comment Zoom Calendar",
+            "format": "16:9 1080p Native Video (57.8s)",
+            "url": "https://www.linkedin.com/feed/update/urn:li:activity:7521453213988847616/",
+            "status": "LIVE (First Comment w/ Zoom Calendar Posted)"
+        },
+        {
+            "channel": "YouTube Shorts (@VisonLabs / @AriaWaveTech — $0.00 Token Arbitrage Edition)",
+            "angle": "'How We Dropped This AI Video from $3.24 to $0.00' + 16 Token Management SEO Tags + Chapters + Bottom Consulting HUD",
+            "format": "9:16 1080x1920 Vertical Short (57.8s)",
+            "url": "https://youtube.com/shorts/LgxGx-Nyj9g",
+            "status": "LIVE (16 Token SEO Tags & Chapters Populated)"
+        },
+        {
+            "channel": "X / Twitter (@AriaTechGroup — $0.00 Token Arbitrage Edition)",
+            "angle": "9:16 Token Management Strategy Video + Consulting Thread w/ Zoom Booking Calendar & GitHub Repo",
+            "format": "9:16 Video + Consulting Thread",
+            "url": "https://x.com/AriaTechGroup/status/2115685031926784443",
+            "status": "LIVE (Thread Published)"
+        },
+        {
+            "channel": "DEV.to (@aijennings — Token Management Strategies)",
+            "angle": "Token Management Strategies: Dropping AI Video Costs from $3.24 to $0.00 with WebBridge + Gemini 2.5 Flash",
+            "format": "Technical Token-Arbitrage Breakdown",
+            "url": "https://dev.to/aijennings/token-management-strategies-dropping-ai-video-costs-from-324-to-000-with-webbridge-gemini-24jg",
+            "status": "LIVE"
+        },
+        {
+            "channel": "AriaWave Official Blog (ariawave.tech/blog — Token Management Strategies)",
+            "angle": "Token Management Strategies: Why You Need Aria Technology Group to Manage & Harvest Your Stranded SaaS AI Tokens",
+            "format": "Flagship Token Management Strategy Article",
+            "url": "https://www.ariawave.tech/blog/ai-token-management-strategies-zero-cost-subscription-arbitrage",
+            "status": "LIVE IN REPO"
+        },
+        {
+            "channel": "LinkedIn (Andrew Jennings — Viral Hook Kling v2 Pro Edition)",
             "angle": "1.1s Steve Jobs Morph + Self-Healing UI Executive Pitch + First-Comment Zoom Calendar",
             "format": "16:9 1080p Native Video (57.8s)",
             "url": "https://www.linkedin.com/feed/update/urn:li:activity:7521395377233633280/",
@@ -234,10 +269,10 @@ for p in campaign_data["live_placements"]:
     </tr>"""
 
 rows_li = ""
-for idx, lp in enumerate(li_posts[:8], 1):
-    is_today = lp["urn"] in ("7521395377233633280", "7521341129460637696", "7521332745965314048")
+for idx, lp in enumerate(li_posts[:10], 1):
+    is_today = lp["urn"] in ("7521453213988847616", "7521395377233633280", "7521341129460637696", "7521332745965314048")
     hl = "background:rgba(136,255,0,0.10);border-left:4px solid #88ff00;" if is_today else ""
-    tag = " <span style='background:#88ff00;color:#000;font-size:11px;font-weight:800;padding:2px 7px;border-radius:4px;margin-left:6px;'>TODAY'S STUDIO TRILOGY</span>" if is_today else ""
+    tag = " <span style='background:#88ff00;color:#000;font-size:11px;font-weight:800;padding:2px 7px;border-radius:4px;margin-left:6px;'>TODAY'S STUDIO SERIES</span>" if is_today else ""
     rows_li += f"""
     <tr style="{hl}">
       <td style="font-weight:800;color:#00f0ff;">#{idx}</td>
