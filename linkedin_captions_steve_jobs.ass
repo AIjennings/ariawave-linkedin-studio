@@ -1,0 +1,42 @@
+[Script Info]
+Title: Aria Technology Group LinkedIn Video — Steve Jobs Midway Character & Voice Swap Edition
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,Segoe UI,54,&H00FFFFFF,&H0000F0FF,&H00080C14,&H96000000,-1,0,0,0,100,100,0.5,0,1,4.5,2.5,2,80,80,58,1
+Style: BadgeTitle,Segoe UI,28,&H00FFE800,&H00FFFFFF,&H00080C14,&H80000000,-1,0,0,0,100,100,1.5,0,1,3.0,1.5,7,55,50,42,1
+Style: BadgeSub,Segoe UI,21,&H00E2E8F0,&H00FFFFFF,&H00080C14,&H80000000,-1,0,0,0,100,100,0.8,0,1,2.5,1.0,7,55,50,78,1
+Style: SwapAlert,Segoe UI,24,&H0088FF00,&H00FFFFFF,&H00080C14,&HB4000000,-1,0,0,0,100,100,1.6,0,1,3.5,1.5,9,50,55,44,1
+Style: SwapSub,Segoe UI,19,&H00FFA8D8,&H00FFFFFF,&H00080C14,&HB4000000,-1,0,0,0,100,100,1.0,0,1,2.5,1.0,9,50,55,78,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 2,0:00:00.00,0:00:22.50,BadgeTitle,,0,0,0,,ARIA TECHNOLOGY GROUP  //  ARIAWAVE.TECH
+Dialogue: 2,0:00:00.00,0:00:22.50,BadgeSub,,0,0,0,,FRONTIER AGENTIC AI  •  SELF-HEALING ENTERPRISE UI
+Dialogue: 2,0:00:22.50,0:00:36.60,BadgeTitle,,0,0,0,,{\fad(80,80)}{\c&H88FF00&}⚡ LIVE CHARACTER & VOICE SWAP  //  STEVE JOBS MODE{\c&HFFE800&}
+Dialogue: 2,0:00:22.50,0:00:36.60,BadgeSub,,0,0,0,,{\fad(80,80)}ELEVENLABS STS + FLUX KONTEXT + OMNIHUMAN / KLING AVATAR V2
+Dialogue: 2,0:00:22.50,0:00:36.60,SwapAlert,,0,0,0,,{\fad(80,80)}● AI PERSONA OVERRIDE ACTIVE
+Dialogue: 2,0:00:22.50,0:00:36.60,SwapSub,,0,0,0,,{\fad(80,80)}SPEAKER: STEVE JOBS (2007 KEYNOTE SYNTHESIS)
+Dialogue: 2,0:00:36.60,0:00:57.80,BadgeTitle,,0,0,0,,{\fad(80,0)}ARIA TECHNOLOGY GROUP  //  ARIAWAVE.TECH
+Dialogue: 2,0:00:36.60,0:00:57.80,BadgeSub,,0,0,0,,{\fad(80,0)}FRONTIER AGENTIC AI  •  SELF-HEALING ENTERPRISE UI
+Dialogue: 3,0:00:00.00,0:00:02.85,Caption,,0,0,0,,{\fad(120,120)}Before you ask — {\c&HFFE800&}yes, that's an alien gunship{\c&HFFFFFF&}
+Dialogue: 3,0:00:02.85,0:00:06.68,Caption,,0,0,0,,{\fad(120,120)}firing {\c&HFFE800&}plasma{\c&HFFFFFF&} outside my window next to my {\c&HFFE800&}Mustang{\c&HFFFFFF&}...
+Dialogue: 3,0:00:06.68,0:00:09.28,Caption,,0,0,0,,{\fad(120,120)}...and yes, our {\c&HFFA8D8&}AI agents{\c&HFFFFFF&} built my studio background too.
+Dialogue: 3,0:00:09.28,0:00:14.20,Caption,,0,0,0,,{\fad(120,120)}What's happening behind me is {\c&HFFE800&}nothing{\c&HFFFFFF&} compared to what we just deployed at {\c&HFFE800&}Aria Technology Group{\c&HFFFFFF&}.
+Dialogue: 3,0:00:14.20,0:00:18.90,Caption,,0,0,0,,{\fad(120,120)}We rolled out a new {\c&HFFA8D8&}Agentic Video Waiver{\c&HFFFFFF&} software to brand-new employees...
+Dialogue: 3,0:00:18.90,0:00:22.50,Caption,,0,0,0,,{\fad(120,120)}...with {\c&HFFE800&}ZERO training{\c&HFFFFFF&}. No manuals. No onboarding sessions.
+Dialogue: 3,0:00:22.50,0:00:26.60,Caption,,0,0,0,,{\fad(120,120)}{\c&H88FF00&}[STEVE JOBS]:{\c&HFFFFFF&} Instead of a rigid legacy screen, it runs on {\c&HFFE800&}generative, iterative UI{\c&HFFFFFF&}
+Dialogue: 3,0:00:26.60,0:00:29.65,Caption,,0,0,0,,{\fad(120,120)}managed by {\c&HFFA8D8&}autonomous agents{\c&HFFFFFF&}.
+Dialogue: 3,0:00:29.65,0:00:32.90,Caption,,0,0,0,,{\fad(120,120)}We hire an employee — they hit an {\c&HFFE800&}edge case{\c&HFFFFFF&} — it doesn't crash.
+Dialogue: 3,0:00:32.90,0:00:36.60,Caption,,0,0,0,,{\fad(120,120)}It {\c&H88FF00&}self-heals and adapts{\c&HFFFFFF&} in real time. {\c&HFFE800&}It's amazing.{\c&HFFFFFF&}
+Dialogue: 3,0:00:36.60,0:00:42.65,Caption,,0,0,0,,{\fad(120,120)}At {\c&HFFE800&}Aria Technology Group{\c&HFFFFFF&}, we're open-sourcing a massive part of this engine through {\c&H88FF00&}ariawave.tech{\c&HFFFFFF&}.
+Dialogue: 3,0:00:42.65,0:00:46.85,Caption,,0,0,0,,{\fad(120,120)}But {\c&HFFE800&}open-source code{\c&HFFFFFF&} is NOT a production outcome.
+Dialogue: 3,0:00:46.85,0:00:51.50,Caption,,0,0,0,,{\fad(120,120)}This takes layers of {\c&HFFE800&}frontier intelligence{\c&HFFFFFF&}, enterprise safety guardrails,
+Dialogue: 3,0:00:51.50,0:00:53.50,Caption,,0,0,0,,{\fad(120,120)}and {\c&HFFA8D8&}seasoned professionals{\c&HFFFFFF&}.
+Dialogue: 3,0:00:53.50,0:00:56.25,Caption,,0,0,0,,{\fad(120,120)}That's why a partner like {\c&HFFE800&}Aria Technology Group{\c&HFFFFFF&} makes all the difference.
+Dialogue: 3,0:00:56.25,0:00:57.80,Caption,,0,0,0,,{\fad(120,120)}{\c&H88FF00&}Reach out — and let's build.{\c&HFFFFFF&}
